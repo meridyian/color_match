@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     public float jumpForce = 10f;
-
 
     public Rigidbody2D rb;
     public SpriteRenderer sr;
@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-
         // check if a jump or left mouse click 
         if (Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0))
         {
@@ -37,18 +36,27 @@ public class Player : MonoBehaviour
             rb.velocity = Vector2.up * jumpForce;
         }
 
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
+
+        if (col.tag == "ColorChanger")
+        {
+            SetRandomColor();
+            return;
+        }
         if (col.tag != currentColor)
         {
             Debug.Log("GAME OVER!!!");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
 
     void SetRandomColor()
     {
-        int index = Random.Range(0,4);
+        int index = Random.Range(0, 4);
 
         switch (index)
         {
@@ -72,5 +80,6 @@ public class Player : MonoBehaviour
         }
 
     }
+
 
 }
