@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
         if (col.tag == "ColorChanger")
         {
             SetRandomColor();
+            Destroy(col.gameObject);
             return;
         }
         if (col.tag != currentColor)
