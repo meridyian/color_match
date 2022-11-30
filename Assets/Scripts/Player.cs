@@ -7,9 +7,11 @@ public class Player : MonoBehaviour
 {
     public float jumpForce = 10f;
 
+
     public Rigidbody2D rb;
     public SpriteRenderer sr;
-
+    private float score = 100f;
+    private float scorecoef;
 
     public string currentColor;
 
@@ -21,6 +23,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        rb.gravityScale = 0f;
         SetRandomColor();
 
     }
@@ -33,6 +36,7 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0))
         {
             // not force since we dont want it to compete with velocity while falling
+            rb.gravityScale = 2.7f;
             rb.velocity = Vector2.up * jumpForce;
         }
 
@@ -43,10 +47,16 @@ public class Player : MonoBehaviour
 
         if (col.tag == "ColorChanger")
         {
+            scorecoef += 1;
             SetRandomColor();
             Destroy(col.gameObject);
+            score = score*scorecoef;
+            Debug.Log(score);
             return;
         }
+
+        
+       
         if (col.tag != currentColor)
         {
             Debug.Log("GAME OVER!!!");

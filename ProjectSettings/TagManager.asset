@@ -9,6 +9,7 @@ TagManager:
   - Pink
   - Magenta
   - ColorChanger
+  - Ground
   layers:
   - Default
   - TransparentFX
