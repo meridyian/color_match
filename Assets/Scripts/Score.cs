@@ -20,7 +20,8 @@ public class Score : MonoBehaviour
     public void Die()
     {
         player.isDead = true;
-
+        GameObject.Find("DeathPanel").SetActive(true);
+        
     }
     
 
