@@ -1,22 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    private float score = 100f;
-    private float scorecoef = 0f;
-    
+    public static float CurrentScore = 0f;
+    Player player;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public Text scoreText;
+    public Text totalScoreText;
+
+    public void TotalScore()
     {
-        if (collision.gameObject.CompareTag("ColorChanger"))
-        {
-            scorecoef += 1;
-            score = score * scorecoef;
-            Debug.Log(score);
-        }
+        scoreText.text = CurrentScore.ToString(); 
+    }
+
+
+    public void Die()
+    {
+        player.isDead = true;
 
     }
+    
 
 }

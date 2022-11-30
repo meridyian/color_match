@@ -7,11 +7,13 @@ public class Player : MonoBehaviour
 {
     public float jumpForce = 10f;
 
-
     public Rigidbody2D rb;
     public SpriteRenderer sr;
-    private float score = 100f;
-    private float scorecoef;
+    public bool isDead = false;
+
+    private float initscore = 100f;
+    private float scorecoef = 0f;
+
 
     public string currentColor;
 
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        Score.CurrentScore = initscore * scorecoef;
         rb.gravityScale = 0f;
         SetRandomColor();
 
@@ -49,9 +52,9 @@ public class Player : MonoBehaviour
         {
             scorecoef += 1;
             SetRandomColor();
+            Score.CurrentScore += initscore * scorecoef;
             Destroy(col.gameObject);
-            score = score*scorecoef;
-            Debug.Log(score);
+
             return;
         }
 
@@ -59,8 +62,8 @@ public class Player : MonoBehaviour
        
         if (col.tag != currentColor)
         {
-            Debug.Log("GAME OVER!!!");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+            isDead = true;
         }
     }
 
