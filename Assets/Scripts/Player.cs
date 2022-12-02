@@ -11,9 +11,8 @@ public class Player : MonoBehaviour
     public SpriteRenderer sr;
     public bool isDead = false;
 
-    private float initscore = 100f;
-    private float scorecoef = 0f;
-
+   
+    public GameObject deathpanel;
 
     public string currentColor;
 
@@ -25,7 +24,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        Score.CurrentScore = initscore * scorecoef;
+        
+        deathpanel.SetActive(false);
         rb.gravityScale = 0f;
         SetRandomColor();
 
@@ -50,20 +50,23 @@ public class Player : MonoBehaviour
 
         if (col.tag == "ColorChanger")
         {
-            scorecoef += 1;
+            
             SetRandomColor();
-            Score.CurrentScore += initscore * scorecoef;
+            Score.CurrentScore += 100;
+            Score.totalScore = Score.CurrentScore;
+
             Destroy(col.gameObject);
 
             return;
         }
 
-        
-       
+
+
         if (col.tag != currentColor)
         {
-
-            isDead = true;
+            Score.totalScore = Score.CurrentScore;
+            deathpanel.SetActive(true);
+            rb.bodyType = RigidbodyType2D.Static;
         }
     }
 

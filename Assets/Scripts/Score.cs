@@ -5,22 +5,37 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    public static float CurrentScore = 0f;
+    public static int CurrentScore = 0;
+    public static int totalScore = 0;
     Player player;
 
+    public Text TotalScore;
     public Text scoreText;
-    public Text totalScoreText;
 
-    public void TotalScore()
+    public EndMenu endmenu;
+    public RestartMenu restartMenu;
+
+    public void Start()
     {
-        scoreText.text = CurrentScore.ToString(); 
+        CurrentScore = 0;
+        
+    }
+
+    public void Update()
+    {
+        scoreText.text = "Score : " + CurrentScore.ToString();
+        TotalScore.text = "Total Score : " + totalScore.ToString();
     }
 
 
     public void Die()
     {
-        player.isDead = true;
-        GameObject.Find("DeathPanel").SetActive(true);
+        if (player.isDead == true)
+        {
+            
+            endmenu.gameObject.SetActive(true);
+            restartMenu.gameObject.SetActive(true);
+        }
         
     }
     
