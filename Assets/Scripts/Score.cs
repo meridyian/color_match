@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
     public static int CurrentScore = 0;
-    public static int totalScore = 0;
+    
     Player player;
 
     public Text TotalScore;
@@ -24,7 +24,7 @@ public class Score : MonoBehaviour
     public void Update()
     {
         scoreText.text = "Score : " + CurrentScore.ToString();
-        TotalScore.text = "Total Score : " + totalScore.ToString();
+        TotalScore.text = "Total Score : " + CurrentScore.ToString();
     }
 
 

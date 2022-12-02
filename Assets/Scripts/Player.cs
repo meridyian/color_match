@@ -53,8 +53,7 @@ public class Player : MonoBehaviour
             
             SetRandomColor();
             Score.CurrentScore += 100;
-            Score.totalScore = Score.CurrentScore;
-
+            
             Destroy(col.gameObject);
 
             return;
@@ -64,7 +63,7 @@ public class Player : MonoBehaviour
 
         if (col.tag != currentColor)
         {
-            Score.totalScore = Score.CurrentScore;
+            
             deathpanel.SetActive(true);
             rb.bodyType = RigidbodyType2D.Static;
         }
